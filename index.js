@@ -10,7 +10,7 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use("/api", userRoutes);
+app.use("/api/users", userRoutes);
 app.use(errorHandler, notFoundHandler);
 
 app.listen(PORT, () => {
