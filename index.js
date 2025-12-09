@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import { connectDB } from "./config/connetDB.js";
+import userRoutes from "./routes/user.routes.js";
+import { errorHandler, notFoundHandler } from "./middlewares/errorHanders.js";
 
 dotenv.config();
 connectDB();
@@ -8,9 +10,8 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello, World!");
-});
+app.use("/api", userRoutes);
+app.use(errorHandler, notFoundHandler);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
